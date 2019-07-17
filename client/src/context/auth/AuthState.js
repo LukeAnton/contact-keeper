@@ -34,9 +34,16 @@ const AuthState = props => {
         "Content-Type": "application/json"
       }
     };
+
     try {
       const res = await axios.post("/api/users", formData, config);
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+
+      loadUser();
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
@@ -49,7 +56,7 @@ const AuthState = props => {
   // Logout
   const logout = () => console.log("loaduser");
   // Clear Errors
-  const clearErrors = () => console.log("loaduser");
+  const clearErrors = () => console.log({ type: CLEAR_ERRORS });
   return (
     <AuthContext.Provider
       value={{
